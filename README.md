@@ -5,6 +5,19 @@ Sentinel-2 Level 2A images will be available from `ee.ImageCollection(projects/u
 
 ![pipeline](https://user-images.githubusercontent.com/41169293/153858873-8fccc5ed-bec7-48dd-89a0-63ff2ae00338.png)
 
+## Jobs
+- [x] Change processing_functions.R to work for Level 2A data instead
+- [ ] Generate Level 2A multiband GeoTIFFs
+- [ ] Upload multiband GeoTIFFs to GEE `ee.ImageCollection(projects/urbanflood-340815/assets/)`
+- [ ] Make data available on Google Drive
+- [x] Reprocess easthouston_2017/
+- [ ] Reprocess creoleLA_2020/
+- [ ] Reprocess dhaka_2020/
+- [ ] Reprocess kolkata_2020/
+- [ ] Reprocess murcia_2019/
+- [ ] Reprocess wuhan_2020/
+- [ ] Re-run ml_pipeline.R with new data
+
 ## Scripts
 ### sen2cor.sh
 Just a set of instructions for how to use sen2cor to prcoess Sentinel-2 Level 1C to Level 2A. Not relevant for other machines.
