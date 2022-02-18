@@ -15,7 +15,7 @@ source("processing_functions.R")
 
 # load datasets
 if(TRUE){
-  wd <- paste0("/Users/alisonpeard/Documents/Oxford/DPhil/flood_mapping/urban_flood/project/")
+  wd <- paste0("/Users/alisonpeard/Documents/Oxford/DPhil/flood_mapping/urbanflood/")
   outfolder <- paste0(wd, "results/")
   df1 <- read.csv(paste0(wd, "data/easthouston_2017/ptsinfo_lw.csv"))[-1]
   df2 <- read.csv(paste0(wd, "data/orlando_2017/ptsinfo_lw.csv"))[-1]

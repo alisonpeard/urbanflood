@@ -13,17 +13,27 @@ library(terra)  # rgdal being retired
 library(dismo) #for sample random points
 source("processing_functions.R")
 
+# TODO: fix loading S2 bands for Level 2A product
+
 # USER INPUT: define event and file names
-region <- "creoleLA"
-year <- "2020"
-sDate <- "L1C_T15RVP_A018213_20200831T170321"
+region <- "easthouston"
+year <- "2017"
+# sDate <- "L1C_T15RTN_A011463_20170901T170523"
 newdata <- F  # whether to manually classify points etc.
-wd <- "/Users/alisonpeard/Documents/Oxford/DPhil/flood_mapping/urban_flood/project"
+wd <- "/Users/alisonpeard/Documents/Oxford/DPhil/flood_mapping/urbanflood"
 
 # set up environment
 if(TRUE){
   outfolder <- paste0(region, '_', year)
   wd <- paste0(wd, "/data/",region,'_',year)
+  
+  # if using Level 2A products
+  sdir <- list.files(wd, pattern="*.SAFE")[2]
+  sdir <- paste0(wd, '/', sdir, "/GRANULE/")
+  s <- list.files(sdir)
+  sdir <- paste0(sdir, s, "/IMG_DATA/")
+  sDate <- paste0(sdir, "R10m/", list.files(paste0(sdir, "R10m/"), "*_TCI_10m.jp2"))
+  
   lonlat <- '+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0'
 }
 
@@ -44,16 +54,17 @@ if(TRUE){
 
 #load reference Sentinel-2 GeoTiff image and save plots
 if(TRUE){
-  ref_utm <-stack(paste0(wd,"/",sDate,'.tif'))
-  #crs(ref_utm): +proj=utm +zone=54 +datum=WGS84 +units=m +no_defs
-  ref_ll <- projectRaster(ref_utm, crs = lonlat)
-  ref_ll_roi <- crop(ref_ll, roi_ll)
+  #ref_utm <-stack(paste0(wd,"/",sDate,'.tif'))
+  ref_utm <- stack(sDate)
   roi_utm <- spTransform(roi_ll, crs(ref_utm))
+  ref_utm_roi <- crop(ref_utm, roi_utm)
+  #crs(ref_utm): +proj=utm +zone=54 +datum=WGS84 +units=m +no_defs
+  ref_ll_roi <- projectRaster(ref_utm_roi, crs=lonlat)
   
-  png(file=paste0(wd,'/',"sentinel2_roi.png"))
-  plotRGB(ref_ll)
-  plot(roi_ll, add=TRUE, border="red", lwd=3)
-  dev.off()
+  #png(file=paste0(wd,'/',"sentinel2_roi.png"))
+  #plotRGB(ref_ll)
+  #plot(roi_ll, add=TRUE, border="red", lwd=3)
+  #dev.off()
   
   png(file=paste0(wd,'/',"sentinel2_roicropped.png"))
   plotRGB(ref_ll_roi)
@@ -62,9 +73,10 @@ if(TRUE){
   #system("say Finished processing Sentinel-2!")
 }
 
+# TODO: CHANGE FOR LEVEL 2A PRODUCTS FOR BANDS
 #load and process Sentinel-2 band data
 if(TRUE){
-  sdir <- list.files(wd, pattern="*.SAFE")
+  sdir <- list.files(wd, pattern="*.SAFE")[2]
   sdir <- paste0(wd, '/', sdir, "/GRANULE/")
   s <- list.files(sdir)
   sdir <- paste0(sdir, s, "/IMG_DATA/")
