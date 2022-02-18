@@ -4,7 +4,7 @@
 # Batch translate JPEG 2000 to GeoTIFF
 #=============================================
 # done
-wdir="/Users/alisonpeard/Documents/Oxford/DPhil/flood_mapping/urban_flood/project"
+wdir="/Users/alisonpeard/Documents/Oxford/DPhil/flood_mapping/urbanflood"
 dhaka="$wdir/data/dhaka_2020/S2A_MSIL2A_20200605T042711_N9999_R133_T45QZG_20220207T162033.SAFE/GRANULE/L2A_T45QZG_A025870_20200605T042710/IMG_DATA"
 easthouston="$wdir/data/easthouston_2017/S2A_MSIL2A_20170901T170521_N9999_R026_T15RTN_20220207T144804.SAFE/GRANULE/L2A_T15RTN_A011463_20170901T170523/IMG_DATA"
 kolkata="$wdir/data/kolkata_2020/S2A_MSIL2A_20200529T043711_N9999_R033_T45QXF_20220207T164127.SAFE/GRANULE/L2A_T45QXF_A025770_20200529T043707/IMG_DATA"
