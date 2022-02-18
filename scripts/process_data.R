@@ -19,7 +19,7 @@ source("processing_functions.R")
 region <- "easthouston"
 year <- "2017"
 # sDate <- "L1C_T15RTN_A011463_20170901T170523"
-newdata <- F  # whether to manually classify points etc.
+newdata <- T  # whether to manually classify points etc.
 wd <- "/Users/alisonpeard/Documents/Oxford/DPhil/flood_mapping/urbanflood"
 
 # set up environment
@@ -76,73 +76,82 @@ if(TRUE){
 # TODO: CHANGE FOR LEVEL 2A PRODUCTS FOR BANDS
 #load and process Sentinel-2 band data
 if(TRUE){
+  # little tricky to get the dir names right...
   sdir <- list.files(wd, pattern="*.SAFE")[2]
   sdir <- paste0(wd, '/', sdir, "/GRANULE/")
   s <- list.files(sdir)
   sdir <- paste0(sdir, s, "/IMG_DATA/")
+  s10dir <- paste0(sdir, "R10m/")
+  s20dir <- paste0(sdir, "R20m/")
+  s60dir <- paste0(sdir, "R60m/")
   
-  b1file <- paste0(sdir, list.files(sdir, "*_B01.jp2"))
+  b1file <- paste0(s60dir, list.files(s60dir, "*_B01_60m.jp2"))
   b1_utm <- raster(b1file)
   b1_utm_roi <- crop(b1_utm, roi_utm)
   b1_sinu_roi <- projectRaster(b1_utm_roi, crs=sinu)
   #plot(b1_sinu_roi)
   
-  b2file <- paste0(sdir, list.files(sdir, "*_B02.jp2"))
+  b2file <- paste0(s10dir, list.files(s10dir, "*_B02_10m.jp2"))
   b2_utm <- raster(b2file)
   b2_utm_roi <- crop(b2_utm, roi_utm)
   b2_sinu_roi <- projectRaster(b2_utm_roi, crs=sinu)
   
-  b3file <- paste0(sdir, list.files(sdir, "*_B03.jp2"))
+  b3file <- paste0(s10dir, list.files(s10dir, "*_B03_10m.jp2"))
   b3_utm <- raster(b3file)
   b3_utm_roi <- crop(b3_utm, roi_utm)
   b3_sinu_roi <- projectRaster(b3_utm_roi, crs=sinu)
   
-  b4file <- paste0(sdir, list.files(sdir, "*_B04.jp2"))
+  b4file <- paste0(s10dir, list.files(s10dir, "*_B04_10m.jp2"))
   b4_utm <- raster(b4file)
   b4_utm_roi <- crop(b4_utm, roi_utm)
   b4_sinu_roi <- projectRaster(b4_utm_roi, crs=sinu)
   
-  b5file <- paste0(sdir, list.files(sdir, "*_B05.jp2"))
+  b5file <- paste0(s20dir, list.files(s20dir, "*_B05_20m.jp2"))
   b5_utm <- raster(b5file)
   b5_utm_roi <- crop(b5_utm, roi_utm)
   b5_sinu_roi <- projectRaster(b5_utm_roi, crs=sinu)
   
-  b6file <- paste0(sdir, list.files(sdir, "*_B06.jp2"))
+  b6file <- paste0(s20dir, list.files(s20dir, "*_B06_20m.jp2"))
   b6_utm <- raster(b6file)
   b6_utm_roi <- crop(b6_utm, roi_utm)
   b6_sinu_roi <- projectRaster(b6_utm_roi, crs=sinu)
   
-  b7file <- paste0(sdir, list.files(sdir, "*_B07.jp2"))
+  b7file <- paste0(s20dir, list.files(s20dir, "*_B07_20m.jp2"))
   b7_utm <- raster(b7file)
   b7_utm_roi <- crop(b7_utm, roi_utm)
   b7_sinu_roi <- projectRaster(b7_utm_roi, crs=sinu)
   
-  b8file <- paste0(sdir, list.files(sdir, "*_B08.jp2"))
+  b8file <- paste0(s10dir, list.files(s10dir, "*_B08_10m.jp2"))
   b8_utm <- raster(b8file)
   b8_utm_roi <- crop(b8_utm, roi_utm)
   b8_sinu_roi <- projectRaster(b8_utm_roi, crs=sinu)
   
-  b9file <- paste0(sdir, list.files(sdir, "*_B09.jp2"))
+  b9file <- paste0(s60dir, list.files(s60dir, "*_B09_60m.jp2"))
   b9_utm <- raster(b9file)
   b9_utm_roi <- crop(b9_utm, roi_utm)
   b9_sinu_roi <- projectRaster(b9_utm_roi, crs=sinu)
   
-  b10file <- paste0(sdir, list.files(sdir, "*_B10.jp2"))
-  b10_utm <- raster(b10file)
-  b10_utm_roi <- crop(b10_utm, roi_utm)
-  b10_sinu_roi <- projectRaster(b10_utm_roi, crs=sinu)
+  # b10file <- paste0(sdir, list.files(sdir, "*_B10.jp2"))
+  # b10_utm <- raster(b10file)
+  # b10_utm_roi <- crop(b10_utm, roi_utm)
+  # b10_sinu_roi <- projectRaster(b10_utm_roi, crs=sinu)
   
-  b11file <- paste0(sdir, list.files(sdir, "*_B11.jp2"))
+  b11file <- paste0(s20dir, list.files(s20dir, "*_B11_20m.jp2"))
   b11_utm <- raster(b11file)
   b11_utm_roi <- crop(b11_utm, roi_utm)
   b11_sinu_roi <- projectRaster(b11_utm_roi, crs=sinu)
 
-  b12file <- paste0(sdir, list.files(sdir, "*_B12.jp2"))
+  b12file <- paste0(s20dir, list.files(s20dir, "*_B12_20m.jp2"))
   b12_utm <- raster(b12file)
   b12_utm_roi <- crop(b12_utm, roi_utm)
   b12_sinu_roi <- projectRaster(b12_utm_roi, crs=sinu)
   
-  # resample to 10m resolution
+  # resample B1,5,6,7,9,11,12 to 10m resolution
+  b1_sinu_roi <- resample(b1_sinu_roi, b3_sinu_roi, method="ngb")
+  b5_sinu_roi <- resample(b5_sinu_roi, b3_sinu_roi, method="ngb")
+  b6_sinu_roi <- resample(b6_sinu_roi, b3_sinu_roi, method="ngb")
+  b7_sinu_roi <- resample(b7_sinu_roi, b3_sinu_roi, method="ngb")
+  b9_sinu_roi <- resample(b9_sinu_roi, b3_sinu_roi, method="ngb")
   b11_sinu_roi <- resample(b11_sinu_roi, b3_sinu_roi, method="ngb")
   b12_sinu_roi <- resample(b12_sinu_roi, b3_sinu_roi, method="ngb")
   
@@ -171,8 +180,8 @@ if(TRUE){
   plot(MNDWI2_ll2,breaks=breakpoints,col=colors)
   dev.off()
   
-  writeRaster(MNDWI1_ll2, paste0(wd,'/', 'MNDWI_311.tif'))
-  writeRaster(MNDWI2_ll2, paste0(wd,'/', 'MNDWI_312.tif'))
+  writeRaster(MNDWI1_ll2, paste0(wd,'/', 'MNDWI_311.tif'), overwrite=newdata)
+  writeRaster(MNDWI2_ll2, paste0(wd,'/', 'MNDWI_312.tif'), overwrite=newdata)
 
   #system("say Finished loading band data!")
 }
@@ -252,7 +261,6 @@ if(TRUE){
   vali$B7 <- extract(b7_sinu_roi, pts_sinu , method='simple')
   vali$B8 <- extract(b8_sinu_roi, pts_sinu , method='simple')
   vali$B9 <- extract(b9_sinu_roi, pts_sinu , method='simple')
-  vali$B10 <- extract(b10_sinu_roi, pts_sinu , method='simple')
   vali$B11 <- extract(b11_sinu_roi, pts_sinu , method='simple')
   vali$B12 <- extract(b12_sinu_roi, pts_sinu , method='simple')
   
@@ -272,9 +280,9 @@ if(TRUE){
   par(oma=c(1,1,1,1),par(mar=c(4,4,2,2)),xpd=T) 
   layout(matrix(c(1,2,3,4,5,6), 3, 2, byrow = TRUE),heights=c(1))
   
-  plotRGB(ref_ll, axes=T)
-  plot(roi_ll, border="red", add=T)
-  title("Sentinel-2")
+  plotRGB(ref_utm, axes=T)
+  plot(roi_utm, border="red", add=T)
+  title("Sentinel-2 Level 2A UTM")
   plotRGB(ref_ll_roi, axes=T)
   plot(pts,add=TRUE,col='red')
   title("Sentinel-2 ROI")

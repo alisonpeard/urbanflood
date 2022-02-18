@@ -3,7 +3,7 @@ Flood mapping from Sentinel-2 imagery and other Earth observation data. This is 
 Data will be available from [here](https://drive.google.com/drive/folders/1PEWk1EoTjsuYFtD8fYGjk1sXEMu_gAaL?usp=sharing) later. <br>
 Sentinel-2 Level 2A images will be available from `ee.ImageCollection(projects/urbanflood-340815/assets/)` later.
 
-![Pipeline](https://user-images.githubusercontent.com/41169293/153858873-8fccc5ed-bec7-48dd-89a0-63ff2ae00338.png)
+![pipeline](https://user-images.githubusercontent.com/41169293/153858873-8fccc5ed-bec7-48dd-89a0-63ff2ae00338.png)
 
 ## Scripts
 ### sen2cor.sh
