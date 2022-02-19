@@ -39,3 +39,5 @@ Tutorials to look at when I come back to this:
 1. [Unsupervised flood detection on Sentinel-2 imagery using the Sentinel API](https://medium.com/analytics-vidhya/unsupervised-flood-detection-with-sentinel-2-satellite-imagery-7a254dc2be2e)
 2. [Detecting changes in Sentinel-1 imagery on GEE](https://developers.google.com/earth-engine/tutorials/community/detecting-changes-in-sentinel-1-imagery-pt-1)
 3. [How to train U-Net on your dataset](https://medium.com/coinmonks/learn-how-to-train-u-net-on-your-dataset-8e3f89fbd623)
+4. [Keras in Python](https://www.datacamp.com/community/tutorials/convolutional-neural-networks-python)
+5. [CNNs for visual recognition](https://cs231n.github.io/convolutional-networks/)
