@@ -2,14 +2,19 @@
 Flood mapping from Earth observation (EO) data. This is parked for now but I will look back it again later. <br> <br>
 Data will be available from [here](https://drive.google.com/drive/folders/1PEWk1EoTjsuYFtD8fYGjk1sXEMu_gAaL?usp=sharing) and `ee.ImageCollection(projects/floodmapping-2022/assets/examples)` later.
 
-![pipeline](https://user-images.githubusercontent.com/41169293/153858873-8fccc5ed-bec7-48dd-89a0-63ff2ae00338.png)
-
 ## Jobs
 - [x] Sentinel-1 flood mapping using omnibus test statistics
 - [ ] Urban Sentinel-1 flood mapping as in [Chini (2019)](https://doi.org/10.3390/rs11020107)
 - [ ] Validation data
 
-## Scripts
+# SAR Scripts
+## mortcanty_tutorial.py
+Contains functions from [this Tutorial](https://developers.google.com/earth-engine/tutorials/community/detecting-changes-in-sentinel-1-imagery-pt-1) to detect changes in Sentinel-1 imagery.
+
+## Idai Floodmaps.ipynb
+Notebook based on [this Tutorial](https://developers.google.com/earth-engine/tutorials/community/detecting-changes-in-sentinel-1-imagery-pt-1) replicating the floodmaps from Cyclone Idai and overlaying them with 2000 mangrove extent maps from Giri (2011). Exports images to Google Earth Engine Project `ee.ImageCollection(projects/floodmapping-2022/assets/examples)` and Google Drive root directory. Also saves final folium map locally as a .html file.
+
+## R Scripts
 ### sen2cor.sh
 Just a set of instructions for how to use sen2cor to process Sentinel-2 Level 1C to Level 2A. Not relevant for other machines.
 
