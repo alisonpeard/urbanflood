@@ -7,11 +7,11 @@ Data will be available from [here](https://drive.google.com/drive/folders/1PEWk1
 - [ ] Urban Sentinel-1 flood mapping as in [Chini (2019)](https://doi.org/10.3390/rs11020107)
 - [ ] Validation data
 
-# SAR Scripts
-## mortcanty_tutorial.py
+## SAR Scripts
+### mortcanty_tutorial.py
 Contains functions from [this Tutorial](https://developers.google.com/earth-engine/tutorials/community/detecting-changes-in-sentinel-1-imagery-pt-1) to detect changes in Sentinel-1 imagery.
 
-## Idai Floodmaps.ipynb
+### Idai Floodmaps.ipynb
 Notebook based on [this Tutorial](https://developers.google.com/earth-engine/tutorials/community/detecting-changes-in-sentinel-1-imagery-pt-1) replicating the floodmaps from Cyclone Idai and overlaying them with 2000 mangrove extent maps from Giri (2011). Exports images to Google Earth Engine Project `ee.ImageCollection(projects/floodmapping-2022/assets/examples)` and Google Drive root directory. Also saves final folium map locally as a .html file.
 
 ## R Scripts
