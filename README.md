@@ -1,26 +1,17 @@
 # Urban Flood
-Flood mapping from Sentinel-2 imagery and other Earth observation data. This is parked for now but I will look back it again later. <br> <br>
-Data will be available from [here](https://drive.google.com/drive/folders/1PEWk1EoTjsuYFtD8fYGjk1sXEMu_gAaL?usp=sharing) later. <br>
-Sentinel-2 Level 2A images will be available from `ee.ImageCollection(projects/urbanflood-340815/assets/)` later.
+Flood mapping from Earth observation (EO) data. This is parked for now but I will look back it again later. <br> <br>
+Data will be available from [here](https://drive.google.com/drive/folders/1PEWk1EoTjsuYFtD8fYGjk1sXEMu_gAaL?usp=sharing) and `ee.ImageCollection(projects/floodmapping-2022/assets/examples)` later.
 
 ![pipeline](https://user-images.githubusercontent.com/41169293/153858873-8fccc5ed-bec7-48dd-89a0-63ff2ae00338.png)
 
 ## Jobs
-- [x] Change processing_functions.R to work for Level 2A data instead
-- [ ] Generate Level 2A multiband GeoTIFFs
-- [ ] Upload multiband GeoTIFFs to GEE `ee.ImageCollection(projects/urbanflood-340815/assets/)`
-- [ ] Make data available on Google Drive
-- [x] Reprocess easthouston_2017/
-- [ ] Reprocess creoleLA_2020/
-- [ ] Reprocess dhaka_2020/
-- [ ] Reprocess kolkata_2020/
-- [ ] Reprocess murcia_2019/
-- [ ] Reprocess wuhan_2020/
-- [ ] Re-run ml_pipeline.R with new data
+- [x] Sentinel-1 flood mapping using omnibus test statistics
+- [ ] Urban Sentinel-1 flood mapping as in [Chini (2019)](https://doi.org/10.3390/rs11020107)
+- [ ] Validation data
 
 ## Scripts
 ### sen2cor.sh
-Just a set of instructions for how to use sen2cor to prcoess Sentinel-2 Level 1C to Level 2A. Not relevant for other machines.
+Just a set of instructions for how to use sen2cor to process Sentinel-2 Level 1C to Level 2A. Not relevant for other machines.
 
 ### jp2_tiff.sh
 Batch translate JPEG2000 files to GeoTIFF so that they can be uploaded to Google Earth Engine.
